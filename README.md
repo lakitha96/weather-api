@@ -13,9 +13,9 @@ A Spring Boot service that fetches weather data from multiple providers, caches 
 - Automatic **failover** between providers if one is down.
 - **Caching** of results for up to 3 seconds to reduce API calls.
 - Gracefully serves **stale data** when all providers are down.
-- Easy-to-extend architecture for adding more providers.
-- Launchable via `run.sh`
-- Fully unit-tested
+- The architecture is easy to extend for adding more providers by following the Strategy pattern. To add a new provider, simply define its order and integrate it into the service.
+- The application is launchable via the `./run.sh` script for easy local execution.
+- The service is fully unit tested with over 80% test coverage.
 
 ---
 
