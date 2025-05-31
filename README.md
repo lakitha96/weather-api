@@ -44,11 +44,8 @@ A Spring Boot service that fetches weather data from multiple providers, caches 
 
 ```env
 WEATHERSTACK_API_KEY=your_key
-WEATHERSTACK_URL=https://api.weatherstack.com
-
 OPENWEATHERMAP_API_KEY=your_key
-OPENWEATHERMAP_URL=https://api.openweathermap.org
-OPENWEATHERMAP_COUNTRY=AU
+SERVER_PORT=availble_port
 ```
 ### 2. Start service
 ```
