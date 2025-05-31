@@ -90,6 +90,22 @@ Returns:
 }
 ```
 
+### Example Requests
+
+#### 1. Local (Default Port 8080)
+
+```
+curl "http://localhost:8080/v1/weather?city=Melbourne"
+```
+
+#### 2. Hosted (Free-tier Platform)
+```
+curl "https://weather-api-dh7q.onrender.com/v1/weather?city=Melbourne"
+```
+
+##### Note: This service is hosted on a free-tier platform. Request delays may occur. Service may also sleep after periods of inactivity.
+
+
 ##  Trade-offs & What Could Be Improved
 | Area                    | Status / Comment                                                                                                                                       |
 |-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
