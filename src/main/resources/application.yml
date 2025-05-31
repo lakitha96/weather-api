@@ -1,0 +1,13 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+provider:
+  weatherstack:
+    api:
+      key: ${WEATHERSTACK_API_KEY}
+      url: api.weatherstack.com
+  openweathermap:
+    api:
+      key: ${OPENWEATHERMAP_API_KEY}
+      url: api.openweathermap.org
+      country: AU
