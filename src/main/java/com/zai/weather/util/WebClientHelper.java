@@ -1,6 +1,8 @@
 package com.zai.weather.util;
 
 import com.zai.weather.exception.WeatherServiceException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
@@ -8,6 +10,7 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
  * @author lakithaprabudh
  */
 public final class WebClientHelper {
+    private static final Logger logger = LoggerFactory.getLogger(WebClientHelper.class);
 
     private WebClientHelper() {
     }
@@ -20,15 +23,19 @@ public final class WebClientHelper {
                     .bodyToMono(String.class)
                     .block();
 
-            if (jsonResponse == null) {
-                throw new WeatherServiceException(sourceName + ": Received empty or invalid response body from the API.");
+            if (jsonResponse == null || jsonResponse.isBlank()) {
+                throw new WeatherServiceException(sourceName + ": Empty or invalid response body from API");
             }
 
             return jsonResponse;
 
         } catch (WebClientResponseException e) {
+            logger.error("[{}] HTTP error while calling {}: status={}, body={}",
+                    sourceName, uri, e.getStatusCode(), e.getResponseBodyAsString());
             throw new WeatherServiceException(sourceName + ": HTTP error - " + e.getStatusCode(), e);
+
         } catch (Exception e) {
+            logger.error("[{}] Unexpected error while calling {}: {}", sourceName, uri, e.getMessage(), e);
             throw new WeatherServiceException(sourceName + ": Failed to retrieve response", e);
         }
     }
