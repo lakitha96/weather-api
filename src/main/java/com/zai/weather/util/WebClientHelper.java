@@ -31,12 +31,16 @@ public final class WebClientHelper {
 
         } catch (WebClientResponseException e) {
             logger.error("[{}] HTTP error while calling {}: status={}, body={}",
-                    sourceName, uri, e.getStatusCode(), e.getResponseBodyAsString());
+                    sourceName, getSanitizedUri(uri), e.getStatusCode(), e.getResponseBodyAsString());
             throw new WeatherServiceException(sourceName + ": HTTP error - " + e.getStatusCode(), e);
 
         } catch (Exception e) {
-            logger.error("[{}] Unexpected error while calling {}: {}", sourceName, uri, e.getMessage(), e);
+            logger.error("[{}] Unexpected error while calling {}: {}", sourceName, getSanitizedUri(uri), e.getMessage(), e);
             throw new WeatherServiceException(sourceName + ": Failed to retrieve response", e);
         }
+    }
+
+    private static String  getSanitizedUri(String uri) {
+        return uri.replaceAll("(?i)(access_key|appid)=([^&]+)", "$1=######");
     }
 }
